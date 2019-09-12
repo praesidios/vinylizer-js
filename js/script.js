@@ -1,53 +1,82 @@
 const audio = document.querySelector('audio');
 const button = document.querySelector('.checkbox');
+const vynilizer = document.querySelector('.vynilizer');
+const disk = document.querySelector('.vinyl-record');
 const trackList = [
   {
-    track: "./audio/Dead by April – Losing You.mp3",
+    src: "./audio/Dead by April – Losing You.mp3",
     name: "Dead by April – Losing You"
   },
   {
-    track: "./audio/Lana Del Rey –  Art Deco.mp3",
+    src: "./audio/Lana Del Rey –  Art Deco.mp3",
     name: "Lana Del Rey –  Art Deco"
   },
   {
-    track: "./audio/Lana Del Rey – Summertime Sadness.mp3",
+    src: "./audio/Lana Del Rey – Summertime Sadness.mp3",
     name: "Lana Del Rey – Summertime Sadness"
   },
   {
-    track: "./audio/Red Hot Chili Peppers -  Dani California.mp3",
+    src: "./audio/Red Hot Chili Peppers -  Dani California.mp3",
     name: "Red Hot Chili Peppers -  Dani California"
   },
   {
-    track: "./audio/Royal Blood - Little Monster.mp3",
+    src: "./audio/Royal Blood - Little Monster.mp3",
     name: "Royal Blood - Little Monster"
   },
   {
-    track: "./audio/The Neighbourhood - Sweater Weather.mp3",
+    src: "./audio/The Neighbourhood - Sweater Weather.mp3",
     name: "The Neighbourhood - Sweater Weather"
   }
 ];
 
 
+const ul = document.createElement('ul');
+ul.className = "track-list";
+vynilizer.appendChild(ul);
 
-// var trackIndex;
-
-//   trackList.forEach((active, index)=>{
-//     active.addEventListener('click', function(){
-//       trackList.forEach((track)=>{
-//         track.classList.remove("active-track")
-//       });
-//       event.target.className = "active-track";
-//       trackIndex = index;
-//     });
-//   });
+const list = trackList.map((track, index)=>{
+  let li = document.createElement('li');
+  li.className = "track"; 
+  li.textContent = track.name;
+  ul.appendChild(li);
 
 
-  // function musicPlay(){
-  //   if(button.checked){
-  //     audio[trackIndex].play();
-  //   }
-  //   else {
-  //     audio[trackIndex].pause();
-  //   }
-  // }
-      
+
+  li.addEventListener('click', function(){
+    list.map(track => {
+      track.classList.remove("active-track");
+      trackIndex = index;
+    });
+    li.className = "active-track";
+    audio.src = track.src;
+    if(button.checked){
+      audio.play();
+    }
+  });
+
+  return li;
+});
+
+
+
+function musicPlay(){
+  if(button.checked){
+    audio.play();
+    diskRotate(true);
+  }
+  else {
+    audio.pause();
+    diskRotate(false);
+  }
+}
+
+
+
+const diskRotate = (status) =>{
+  if(status){
+    disk.style.animation = "move 2.5s infinite linear";
+  }
+  else{
+    disk.style.animation = "move 2.5s linear";
+  }
+}

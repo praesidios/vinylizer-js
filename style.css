@@ -23,6 +23,7 @@ body {
   width: 290px;
 }
 
+
 .box-console {
   font-family: 'Franklin Gothic Medium';
   color: darkred;
@@ -90,4 +91,17 @@ body {
   margin-bottom: 5px;
   transition: .3s;
   transform: translate(-25px)
+}
+
+
+@keyframes move {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
